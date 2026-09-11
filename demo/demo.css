@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: #f4f6f2;
+  color: #1f2a1c;
+}
+
+.demo {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.demo header h1 {
+  margin-bottom: 0.25rem;
+}
+
+.demo-card {
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.demo-card h2 {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.demo button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #5a6f07;
+  border-radius: 4px;
+  background: #93ad18;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.demo-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.demo-log {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Example of theming through the class name props */
+.demo-blocker {
+  --hrnet-modal-overlay-bg: rgba(40, 55, 10, 0.6);
+}
+
+.demo-modal {
+  --hrnet-modal-radius: 16px;
+  --hrnet-modal-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  border-top: 6px solid #93ad18;
+}
+
+.demo-close {
+  --hrnet-modal-close-bg: #5a6f07;
+}
