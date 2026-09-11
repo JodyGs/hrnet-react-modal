@@ -24,8 +24,10 @@
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
@@ -39,7 +41,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && tsc -p tsconfig.types.json",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",
@@ -62,6 +64,7 @@
     "oxlint": "^1.81.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "typescript": "^7.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.0"
   }

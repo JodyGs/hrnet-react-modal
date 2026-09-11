@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Modal, useModal } from '../src/index.js'
+import { Modal, useModal } from '../src/bundle.js'
 
 function ConfirmationExample() {
   const { isOpen, open, close } = useModal()

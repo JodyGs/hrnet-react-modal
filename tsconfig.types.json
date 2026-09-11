@@ -1,0 +1,19 @@
+{
+  "//": "Generates the .d.ts files of the package from the JSDoc comments (no TypeScript source).",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2020",
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "outDir": "dist/types"
+  },
+  "include": [
+    "src/index.js"
+  ]
+}
