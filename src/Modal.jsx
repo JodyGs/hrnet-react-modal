@@ -2,6 +2,7 @@ import { useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useBodyScrollLock } from './hooks/useBodyScrollLock.js'
 import { useEscapeKey } from './hooks/useEscapeKey.js'
+import { useFadeTransition } from './hooks/useFadeTransition.js'
 import { useFocusTrap } from './hooks/useFocusTrap.js'
 import { useOverlayClick } from './hooks/useOverlayClick.js'
 import { classNames } from './utils/classNames.js'
@@ -21,6 +22,8 @@ export function Modal({
   clickClose = true,
   showClose = true,
   closeText = 'Close',
+  fadeDuration = 0,
+  fadeDelay = 1,
   modalClass,
   blockerClass,
   closeClass,
@@ -28,19 +31,37 @@ export function Modal({
   ariaLabel,
   ariaDescribedBy,
   portalTarget,
+  onOpen,
+  onAfterClose,
 }) {
   const titleId = useId()
   const dialogRef = useRef(null)
-  const overlayHandlers = useOverlayClick(onClose, clickClose)
+  // Same timing as jquery-modal: the overlay fades in first, then the dialog
+  // starts fading in after `fadeDuration * fadeDelay`. Both fade out together.
+  const dialogDelay = fadeDuration * fadeDelay
+  const { isMounted, isVisible } = useFadeTransition(isOpen, {
+    enterDuration: fadeDuration + dialogDelay,
+    exitDuration: fadeDuration,
+    onEntered: onOpen,
+    onExited: onAfterClose,
+  })
+  const overlayHandlers = useOverlayClick(onClose, isOpen && clickClose)
 
   useEscapeKey(onClose, isOpen && escapeClose)
   useFocusTrap(dialogRef, isOpen)
-  useBodyScrollLock(isOpen && lockScroll)
+  useBodyScrollLock(isMounted && lockScroll)
 
-  if (!isOpen || typeof document === 'undefined') return null
+  if (!isMounted || typeof document === 'undefined') return null
 
   return createPortal(
-    <div className={classNames('hrnet-modal-blocker', blockerClass)} {...overlayHandlers}>
+    <div
+      className={classNames('hrnet-modal-blocker', isVisible && 'is-visible', blockerClass)}
+      style={{
+        '--hrnet-modal-fade-duration': `${fadeDuration}ms`,
+        '--hrnet-modal-fade-delay': `${dialogDelay}ms`,
+      }}
+      {...overlayHandlers}
+    >
       <div
         ref={dialogRef}
         role="dialog"

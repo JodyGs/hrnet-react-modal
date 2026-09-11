@@ -65,3 +65,26 @@
   outline: 3px solid var(--hrnet-modal-focus-ring, #5b8def);
   outline-offset: 2px;
 }
+
+/* Fade transitions (durations are set inline from the fadeDuration / fadeDelay props). */
+.hrnet-modal-blocker,
+.hrnet-modal {
+  opacity: 0;
+  transition: opacity var(--hrnet-modal-fade-duration, 0ms) ease;
+}
+
+.hrnet-modal-blocker.is-visible,
+.hrnet-modal-blocker.is-visible .hrnet-modal {
+  opacity: 1;
+}
+
+.hrnet-modal-blocker.is-visible .hrnet-modal {
+  transition-delay: var(--hrnet-modal-fade-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hrnet-modal-blocker,
+  .hrnet-modal {
+    transition: none;
+  }
+}
