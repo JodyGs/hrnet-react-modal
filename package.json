@@ -1,23 +1,59 @@
 {
-  "name": "hrnet-react-modal",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@jodygs/hrnet-react-modal",
+  "version": "0.1.0",
+  "description": "Accessible, lightweight React modal component converted from the jQuery plugin jquery-modal for the HRnet application.",
+  "keywords": [
+    "react",
+    "modal",
+    "dialog",
+    "component",
+    "accessible",
+    "jquery-modal",
+    "hrnet"
+  ],
+  "author": "Jody Gonzales",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JodyGs/hrnet-react-modal.git"
+  },
+  "homepage": "https://github.com/JodyGs/hrnet-react-modal#readme",
+  "bugs": {
+    "url": "https://github.com/JodyGs/hrnet-react-modal/issues"
+  },
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "vite": "^8.3.0"
   }
 }
