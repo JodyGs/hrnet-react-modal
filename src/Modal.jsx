@@ -1,6 +1,7 @@
-import { useId } from 'react'
+import { useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useEscapeKey } from './hooks/useEscapeKey.js'
+import { useFocusTrap } from './hooks/useFocusTrap.js'
 import { useOverlayClick } from './hooks/useOverlayClick.js'
 import { classNames } from './utils/classNames.js'
 
@@ -27,15 +28,18 @@ export function Modal({
   portalTarget,
 }) {
   const titleId = useId()
+  const dialogRef = useRef(null)
   const overlayHandlers = useOverlayClick(onClose, clickClose)
 
   useEscapeKey(onClose, isOpen && escapeClose)
+  useFocusTrap(dialogRef, isOpen)
 
   if (!isOpen || typeof document === 'undefined') return null
 
   return createPortal(
     <div className={classNames('hrnet-modal-blocker', blockerClass)} {...overlayHandlers}>
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={title ? titleId : undefined}
