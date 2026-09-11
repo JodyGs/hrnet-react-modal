@@ -1,5 +1,7 @@
 import { useId } from 'react'
 import { createPortal } from 'react-dom'
+import { useEscapeKey } from './hooks/useEscapeKey.js'
+import { useOverlayClick } from './hooks/useOverlayClick.js'
 import { classNames } from './utils/classNames.js'
 
 /**
@@ -13,6 +15,8 @@ export function Modal({
   onClose,
   children,
   title,
+  escapeClose = true,
+  clickClose = true,
   showClose = true,
   closeText = 'Close',
   modalClass,
@@ -23,11 +27,14 @@ export function Modal({
   portalTarget,
 }) {
   const titleId = useId()
+  const overlayHandlers = useOverlayClick(onClose, clickClose)
+
+  useEscapeKey(onClose, isOpen && escapeClose)
 
   if (!isOpen || typeof document === 'undefined') return null
 
   return createPortal(
-    <div className={classNames('hrnet-modal-blocker', blockerClass)}>
+    <div className={classNames('hrnet-modal-blocker', blockerClass)} {...overlayHandlers}>
       <div
         role="dialog"
         aria-modal="true"
