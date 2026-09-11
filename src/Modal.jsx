@@ -1,5 +1,6 @@
 import { useId, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import { useBodyScrollLock } from './hooks/useBodyScrollLock.js'
 import { useEscapeKey } from './hooks/useEscapeKey.js'
 import { useFocusTrap } from './hooks/useFocusTrap.js'
 import { useOverlayClick } from './hooks/useOverlayClick.js'
@@ -23,6 +24,7 @@ export function Modal({
   modalClass,
   blockerClass,
   closeClass,
+  lockScroll = true,
   ariaLabel,
   ariaDescribedBy,
   portalTarget,
@@ -33,6 +35,7 @@ export function Modal({
 
   useEscapeKey(onClose, isOpen && escapeClose)
   useFocusTrap(dialogRef, isOpen)
+  useBodyScrollLock(isOpen && lockScroll)
 
   if (!isOpen || typeof document === 'undefined') return null
 
