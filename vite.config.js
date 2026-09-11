@@ -24,4 +24,12 @@ export default defineConfig({
     // public/ only serves the demo page, it must not end up in the package.
     copyPublicDir: false,
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.js'],
+    coverage: {
+      include: ['src/**/*.{js,jsx}'],
+      exclude: ['src/test/**', 'src/index.js'],
+    },
+  },
 })
