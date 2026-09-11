@@ -1,2 +1,4 @@
 // Public API of the library.
-export {}
+import './styles/modal.css'
+
+export { Modal } from './Modal.jsx'
